@@ -1,24 +1,19 @@
 package com.example.demo.Configuration;
 
-import javax.json.JsonException;
+import java.security.NoSuchAlgorithmException;
 
-import org.apache.http.HttpHost;
-import org.elasticsearch.client.RestClient;
+import javax.net.ssl.SSLContext;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.json.jackson.JacksonJsonpMapper;
-import co.elastic.clients.transport.ElasticsearchTransport;
-import co.elastic.clients.transport.rest_client.RestClientTransport;
-
 @Configuration
 public class ElasticSearchConfiguration extends ElasticsearchConfiguration{
     @Override
+    @Bean
     public ClientConfiguration clientConfiguration(){
-        return ClientConfiguration.builder().connectedTo("0.0.0.0:9200").build();
+        return ClientConfiguration.builder().connectedToLocalhost().build();
     }
-
 }

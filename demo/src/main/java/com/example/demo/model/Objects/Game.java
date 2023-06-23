@@ -1,27 +1,23 @@
 package com.example.demo.model.Objects;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-import org.elasticsearch.index.search.ESToParentBlockJoinQuery;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.Range;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
+import co.elastic.clients.util.DateTime;
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
 
-import co.elastic.clients.util.DateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,16 +32,14 @@ public class Game {
     String                      title;  
 
     @Past
-    @Field(type = FieldType.Date, name = "released")
-    LocalDate                   released;
-    
-    @Field()
-    Integer                     metacritic;
+    @Field(type = FieldType.Date, name = "released",format = DateFormat.year_month_day)
 
+    DateTime                released;
+    
     @PastOrPresent
-    @Field(type = FieldType.Date, name = "updated")
-    LocalDateTime                    updated;
-    @Pattern(regexp = "^https?://[\\w.-]+(?:/\\S+)?$",
+    @Field(type = FieldType.Date, name = "updated",format = DateFormat.date_hour_minute_second)
+    DateTime                    updated;
+    @Pattern(regexp = "^https?://[\\wno.-]+(?:/\\S+)?$",
             message = "Debe ser una URL válida")
 
     @Field(type = FieldType.Text, name = "url")
