@@ -2,8 +2,11 @@ package com.example.demo.model.Objects;
 
 import java.util.Collection;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,8 +23,17 @@ public class User implements UserDetails{
 
     @Id 
     private Integer id;
+    @Field(name = "username", type = FieldType.Text)
     private String username;
+    @Field(name = "password", type = FieldType.Text)
     private String password;
+    @Field(name = "name", type = FieldType.Text)
+    private String name;
+    @Field(name = "surname", type = FieldType.Text)
+    private String surname;
+    @Field(name = "email", type = FieldType.Text)
+    private String email;
+    @ Field(name = "role", type = FieldType.Text)
     private Roles role;
 
     @Override
