@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <!--    Logo Div-->
-    <div class="row">
+    <!--<div class="row">
       <div class="col-12 text-center pt-3">
-        <router-link :to="{ name: 'Home' }">
+        <router-link :to="{ name: 'login' }">
           <img id="logo" src="../assets/logo.png" />
         </router-link>
       </div>
-    </div>
+    </div>-->
 
     <div class="row">
       <div class="col-12 justify-content-center d-flex flex-row pt-5">
         <div id="signin-div" class="flex-item border">
           <h2 class="pt-4 pl-4">Login</h2>
-          <form @submit="login" class="pt-4 pl-4 pr-4">
+          <form @submit.prevent="login" class="pt-4 pl-4 pr-4">
             <div class="form-group">
               <label>Email</label>
               <input
@@ -33,17 +33,17 @@
               />
             </div>
             <small class="form-text text-muted"
-              >By continuing you are accepting our user conditios.</small
+              >By continuing you are accepting our user conditions.</small
             >
             <button type="submit" class="btn btn-primary mt-2 py-0">
               Continue
-              <div
+              <span
                 v-if="loading"
                 class="spinner-border spinner-border-sm"
                 role="status"
-              >
-                <span class="sr-only">Loading...</span>
-              </div>
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Loading...</span>
             </button>
           </form>
           <hr />
@@ -52,7 +52,7 @@
           >
           <p class="text-center">
             <router-link
-              :to="{ name: 'Signup' }"
+              :to="{ name: 'register' }"
               class="btn btn-dark text-center mx-auto px-5 py-1 mb-2"
               >Create Your Account</router-link
             >
@@ -71,18 +71,24 @@ export default {
     return {
       email: null,
       password: null,
-      loading: null,
+      loading: false,
     };
   },
   methods: {
-    async login(e) {
-      e.preventDefault();
+    async login() {
       this.loading = true;
 
       const user = {
         email: this.email,
         password: this.password,
       };
+
+      // Perform your login logic here
+
+      // Reset the form and loading state
+      this.email = null;
+      this.password = null;
+      this.loading = false;
     }
   },
 };

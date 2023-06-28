@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="row">
-          <div v-for="index in this.category_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+          <div v-for="index in category_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
             <CategoryBox :category="categories[index-1]">
             </CategoryBox>
           </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="row">
-          <div v-for="index in this.game_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+          <div v-for="index in game_size" :key="index" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
             <GameBox :game="games[index-1]">
             </GameBox>
           </div>
@@ -44,7 +44,7 @@
   </template>
   
   <script>
-    import GameBox from "../components/Product/GameBox";
+    import GameBox from "../components/Games/GameBox";
     import CategoryBox from "../components/Category/CategoryBox";
     export default {
       name: 'Home',
@@ -60,34 +60,34 @@
         this.category_size = this.categories.length;
         this.category_size = Math.min(6, this.category_size);
   
-        this.game_size = this.products.length;
+        this.game_size = this.games.length;
         this.game_size = Math.min(8, this.game_size);
       }
     }
   </script>
   
-  <style>
-    .page-holder {
-      min-height: 100vh;
-    }
-  
-    .bg-cover {
-      background-size: cover !important;
-    }
-  
-    #heading {
-      text-decoration: none;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      opacity: 0.8;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-  
-    #content {
-      opacity: 0.8;
-    }
-  
-    h2 {
-      font-family: 'Josefin Sans', sans-serif;
-    }
-  </style>
+  <style scoped>
+  .page-holder {
+    min-height: 100vh;
+  }
+
+  .bg-cover {
+    background-size: cover !important;
+  }
+
+  #heading {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    opacity: 0.8;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  #content {
+    opacity: 0.8;
+  }
+
+  h2 {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+</style>

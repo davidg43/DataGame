@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <div>
       <Navbar />
       <section class="my-5">
         <div class="mx-auto w-25" style="max-width: 100%;">
@@ -17,63 +17,58 @@
             <label for="pNo" class="form-label">Phone Number</label>
             <input id="pNo" type="text" name="pNo" class="form-control" placeholder="Phone Number" required v-model="user.pNo">
   
-            <input class="btn btn-primary w-100" type="submit" value="Submit">
+            <button class="btn btn-primary w-100" type="submit">Submit</button>
           </form>
         </div>
       </section>
-    </main>
+    </div>
   </template>
-
-
-<script>
-import Navbar from '../components/Navbar.vue';
-
-export default {
+  
+  <script>
+  import Navbar from '../components/Navbar.vue';
+  
+  export default {
     name: 'UpdateUser',
     components: {
-        Navbar
+      Navbar
     },
-
-    data(){
-        return {
-            user: {
-                id: '',
-                name: '',
-                surname: '',
-                email: '',
-                pNo: ''
-            }
+    data() {
+      return {
+        user: {
+          id: '',
+          name: '',
+          surname: '',
+          email: '',
+          pNo: ''
         }
+      }
     },
-
-    beforeMount(){
-        this.getUsers();
+    mounted() {
+      this.getUsers();
     },
-
     methods: {
-        getUsers(){
-            fetch(`http://localhost:8080/user/${this.$route.params.id}`)
-            .then(res => res.json())
-            .then(data => {
-                this.user = data;
-                console.log(this.user);
-            })
-
-        },
-        updateUser(){
-            fetch(`http://localhost:8080/user`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.user)
-            })
-            .then(data => {
-                console.log(data);
-                this.$router.push('/');
-            })
-        }
+      getUsers() {
+        fetch(`http://localhost:8080/user/${this.$route.params.id}`)
+          .then(res => res.json())
+          .then(data => {
+            this.user = data;
+            console.log(this.user);
+          });
+      },
+      updateUser() {
+        fetch(`http://localhost:8080/user`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.user)
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            this.$router.push('/');
+          });
+      }
     }
-}
-
-</script>
+  };
+  </script>
