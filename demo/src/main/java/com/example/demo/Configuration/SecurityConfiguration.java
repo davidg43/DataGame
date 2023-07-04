@@ -53,23 +53,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider());
         http.csrf().disable().authorizeRequests().
-        antMatchers("/index").authenticated().and().
-        formLogin().usernameParameter("nombre").
-        passwordParameter("password");
-        //http.authorizeRequests().antMatchers("/index").;
-        // http.authorizeRequests().antMatchers("/login").permitAll()
-        //         .antMatchers("/users/**", "/settings/**").hasAuthority("Admin")
-        //         .hasAnyAuthority("Admin", "Editor", "Salesperson")
-        //         .hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
-        //         .anyRequest().authenticated()
-        //         .and().formLogin()
-        //         .loginPage("/login")
-        //             .usernameParameter("email")
-        //             .permitAll()
-        //         .and()
-        //         .rememberMe().key("AbcdEfghIjklmNopQrsTuvXyz_0123456789")
-        //         .and()
-        //         .logout().permitAll();
+            antMatchers("/index").authenticated().and().
+            formLogin().usernameParameter("nombre").
+            passwordParameter("password");
         http.headers().frameOptions().sameOrigin();
  
         return http.build();
