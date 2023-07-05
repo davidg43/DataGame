@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,8 +24,8 @@ public class GameLibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    // @OneToMany(mappedBy = "library")
-    // Collection<Game> games;
+    @OneToMany
+    Collection<GameRepresentation> games;
     @OneToOne(mappedBy = "library")
     User user;
 

@@ -25,8 +25,6 @@ import com.example.demo.Repository.GameRepresentationRepository;
 import com.example.demo.model.Objects.Game;
 import com.example.demo.model.Objects.GameRepresentation;
 
-import co.elastic.clients.util.DateTime;
-
 @Service
 public class IndexService {
     	String PATH = "demo/game_info.csv"; 
@@ -111,6 +109,9 @@ public class IndexService {
 
     public List<Game> getGames() {
         return gameRepository.findAll();
+    }
+    public List<GameRepresentation> getGamesRepresentations() {
+        return gameRepresentationRepository.findAll();
     }
 
 

@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.IndexService;
 import com.example.demo.model.Objects.Game;
+import com.example.demo.model.Objects.GameRepresentation;
+
+import org.springframework.web.servlet.view.RedirectView;
+
 
 @RestController
 @ResponseBody
@@ -26,16 +30,21 @@ public class IndexController {
     } 
 
     @GetMapping("/index")
-    public String index() throws IOException{
+    public RedirectView index() throws IOException{
         indexService.indexGames(); 
-        return  "0.0.0.0/games";
+        return new RedirectView("/gamesRepresentation");
     }
-
 
     @GetMapping("/games")
     public List<Game> indexGames() throws IOException{
         return indexService.getGames();
     } 
+    @GetMapping("/gamesRepresentation")
+    public List<GameRepresentation> indexGamesR() throws IOException{
+        return indexService.getGamesRepresentations();
+    } 
+    
+
 
     @GetMapping("/games/{query}")
     public List<Game> getGamesByQuery(
