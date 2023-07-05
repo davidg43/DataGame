@@ -1,6 +1,8 @@
 package com.example.demo.model.Objects;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.springframework.data.annotation.Id;
@@ -33,13 +35,13 @@ public class Game {
 
       
     @Past
-    @Field(name = "released",format = DateFormat.year_month_day)
-    DateTime                released;
+    @Field(type = FieldType.Date, name = "released",format = DateFormat.year_month_day)
+    LocalDate                released;
 
       
     @PastOrPresent
-    @Field(name = "updated",format = DateFormat.date_hour_minute_second)
-    DateTime                    updated;
+    @Field(type = FieldType.Date, name = "updated",format = DateFormat.date_hour_minute_second)
+    LocalDateTime                    updated;
 
       
     @Pattern(regexp = "^https?://[\\wno.-]+(?:/\\S+)?$",
