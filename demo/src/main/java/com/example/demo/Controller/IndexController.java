@@ -16,21 +16,28 @@ import com.example.demo.model.Objects.Game;
 
 @RestController
 @ResponseBody
-@RequestMapping("/index")
+
 public class IndexController {
 
     private IndexService    indexService;
 
     public IndexController(ElasticsearchOperations elasticsearchOperations, IndexService indexService){
         this.indexService = indexService;
+    } 
+
+    @GetMapping("/index")
+    public String index() throws IOException{
+        indexService.indexGames(); 
+        return  "0.0.0.0/games";
     }
 
-    @GetMapping
+
+    @GetMapping("/games")
     public List<Game> indexGames() throws IOException{
         return indexService.getGames();
     } 
 
-    @GetMapping("/{query}")
+    @GetMapping("/games/{query}")
     public List<Game> getGamesByQuery(
         @PathVariable(name = "query") String query,
         @RequestParam(name = "p", required = false) String platform,

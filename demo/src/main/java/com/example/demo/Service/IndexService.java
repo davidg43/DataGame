@@ -18,7 +18,9 @@ import org.springframework.data.elasticsearch.core.Range;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.GameRepository;
+import com.example.demo.Repository.GameRepresentationRepository;
 import com.example.demo.model.Objects.Game;
+import com.example.demo.model.Objects.GameRepresentation;
 
 import co.elastic.clients.util.DateTime;
 
@@ -28,10 +30,19 @@ public class IndexService {
 
     private GameRepository gameRepository;
     private ElasticsearchOperations operations;
+    private GameRepresentationRepository gameRepresentationRepository;
 
-    public IndexService(GameRepository gameRepository, ElasticsearchOperations operations){
+    public IndexService(GameRepository gameRepository,
+     ElasticsearchOperations operations,
+     GameRepresentationRepository gameRepresentationRepository){
         this.gameRepository = gameRepository;
         this.operations = operations;
+        this.gameRepresentationRepository = gameRepresentationRepository;
+    }
+    public void saveGameRepresentation(Game game){
+        GameRepresentation gameRepresentation = new GameRepresentation();
+        gameRepresentation.setId(game.getId());
+        gameRepresentationRepository.save(gameRepresentation);
     }
 
     public static Game crateNGame(CSVRecord entry){
@@ -40,7 +51,7 @@ public class IndexService {
         game.setTitle(entry.get(2));
         if(!entry.get(4).isEmpty())
             // game.setReleased(DateTe.parse(entry.get(4), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            game.setReleased(DateTime.of(entry.get(4), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        game.setReleased(DateTime.of(entry.get(4), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         game.setUpdated(DateTime.of(entry.get(6), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
         game.setURL(entry.get(7));
 
@@ -52,7 +63,6 @@ public class IndexService {
         game.setPlatform(getCollection(entry.get(16)));
         game.setDevelopers(getCollection(entry.get(17)));
         game.setGenres(getCollection(entry.get(18)));
-
         return game;
     }
 
@@ -75,6 +85,9 @@ public class IndexService {
         //Ordenacion de lineas por metacritic. 
         records.sort(Comparator.comparingDouble(record->Double.parseDouble(record.get(8))));
         List<Game> games = records.stream().filter(r->Double.parseDouble(r.get(8))>4.0).map(x->crateNGame(x)).collect(Collectors.toList());
+        games.forEach(g->{
+            saveGameRepresentation(g);
+        });
         gameRepository.saveAll(games);
     }
 
@@ -83,6 +96,7 @@ public class IndexService {
     }
 
     public void indexGames() throws IOException {
+        gameRepository.deleteAll();
         indexGames(PATH);
     }
 

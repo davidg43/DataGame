@@ -1,16 +1,17 @@
 package com.example.demo.model.Objects;
 
-import java.util.Collection;
 
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.example.demo.Configuration.Roles;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,66 +19,35 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(indexName = "users")
-public class User implements UserDetails{   
+@Entity
+@Table(name="User")
+public class User {   
 
-    @Id 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Field(name = "username", type = FieldType.Text)
-    private String username;
-    @Field(name = "password", type = FieldType.Text)
+    @Column(unique = true)
+    private String username; 
+
+    @Column
     private String password;
-    @Field(name = "name", type = FieldType.Text)
+
+    @Column
     private String name;
-    @Field(name = "surname", type = FieldType.Text)
+
+    @Column
     private String surname;
-    @Field(name = "email", type = FieldType.Text)
+
+    @Column
     private String email;
-    @ Field(name = "role", type = FieldType.Text)
+
+    @Column
     private Roles role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    GameLibrary library;
 
-    @Override
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
-    }
-
-    @Override
-    public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isCredentialsNonExpired'");
-    }
-
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
-    }
-    
+   
 
 
 }
