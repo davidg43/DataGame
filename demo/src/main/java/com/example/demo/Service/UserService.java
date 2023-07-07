@@ -17,8 +17,8 @@ public class UserService{
     public UserService(UserRepository repository){
         this.repository = repository;
     }
-    public User getByName(String name){
-        return repository.findByName(name);
+    public User getByUserName(String name){
+        return repository.findByUserName(name);
     }
 
     public void save(User user){

@@ -1,8 +1,5 @@
 package com.example.demo.Configuration;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,40 +7,21 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.example.demo.Service.UserDetailsServiceImp;
 
 
 
 @Configuration
 public class SecurityConfiguration {
- 
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-             GrantedAuthority auth = new SimpleGrantedAuthority(Roles.USER.name());
-             String password = "password";
-
-             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-             String encodedPassword = passwordEncoder.encode(password);
- 
-             Collection<GrantedAuthority> authorities = Collections.singletonList(auth);
-             UserDetails user = new User("nombre", encodedPassword, authorities);
-             return user;
-            }
-            
-        };
+    public UserDetailsServiceImp userDetailsServiceImp(){
+        return new UserDetailsServiceImp();
     }
- 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -51,14 +29,23 @@ public class SecurityConfiguration {
  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authenticationProvider(authenticationProvider());
-        http.csrf().disable().authorizeRequests().
-            antMatchers("/index").authenticated().and().
-            formLogin().usernameParameter("nombre").
-            passwordParameter("password");
-        http.headers().frameOptions().sameOrigin();
- 
+        http.csrf().disable();
+        http.authorizeHttpRequests().anyRequest().permitAll();
+        http.formLogin().authenticationDetailsSource(context -> context.isUserInRole(Roles.USER.name()));
+        http.headers().frameOptions().disable();
         return http.build();
+
+        // http.authorizeRequests().anyRequest().permitAll();
+        // http.formLogin().loginPage("/login");
+        // http.formLogin().usernameParameter("email");
+        // http.formLogin().passwordParameter("password");
+        // http.formLogin().defaultSuccessUrl("/");
+        // http.formLogin().failureUrl("/loginError");
+        // http.csrf().disable();
+        // http.headers().frameOptions().disable();
+        
+        // return http.build();
+
     }
  
     @Bean
@@ -69,8 +56,8 @@ public class SecurityConfiguration {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        
-        authProvider.setUserDetailsService(userDetailsService());
+
+        authProvider.setUserDetailsService(userDetailsServiceImp());
         authProvider.setPasswordEncoder(passwordEncoder());
     
     return authProvider;
@@ -80,5 +67,5 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(
         AuthenticationConfiguration authConfig) throws Exception {
     return authConfig.getAuthenticationManager();
-}
+    }
 }
