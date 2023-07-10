@@ -29,22 +29,15 @@ public class SecurityConfiguration {
  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeHttpRequests().anyRequest().permitAll();
-        http.formLogin().authenticationDetailsSource(context -> context.isUserInRole(Roles.USER.name()));
-        http.headers().frameOptions().disable();
-        return http.build();
 
-        // http.authorizeRequests().anyRequest().permitAll();
-        // http.formLogin().loginPage("/login");
-        // http.formLogin().usernameParameter("email");
-        // http.formLogin().passwordParameter("password");
-        // http.formLogin().defaultSuccessUrl("/");
-        // http.formLogin().failureUrl("/loginError");
-        // http.csrf().disable();
-        // http.headers().frameOptions().disable();
-        
-        // return http.build();
+
+        http.authenticationProvider(authenticationProvider());
+        http.csrf().disable().authorizeRequests().
+            antMatchers("/index/**").authenticated().and().
+            formLogin();
+        http.headers().frameOptions().sameOrigin();
+ 
+        return http.build();
 
     }
  
