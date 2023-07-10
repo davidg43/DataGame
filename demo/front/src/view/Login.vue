@@ -59,6 +59,7 @@ input[type="password"] {
   padding: 10px;
   border: 1px solid #000000;
   border-radius: 4px;
+  color: #000000;
 }
 
 button[type="submit"] {
