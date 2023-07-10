@@ -1,5 +1,13 @@
 {
   "dependencies": {
-    "vue": "^2.7.14"
+    "axios": "^1.4.0",
+    "vue": "^2.7.14",
+    "vue-axios": "^3.5.2",
+    "vue-carousel-3d": "^1.0.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "material-design-icons-iconfont": "^6.7.0",
+    "sass": "^1.63.6"
   }
 }
