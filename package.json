@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "postcss": "^8.4.25",
     "vue": "^2.7.14",
     "vue-axios": "^3.5.2",
     "vue-carousel-3d": "^1.0.1"
