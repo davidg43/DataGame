@@ -8,7 +8,6 @@ import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfigurat
 @Configuration
 public class ElasticSearchConfiguration extends ElasticsearchConfiguration{
     @Override
-    @Bean
     public ClientConfiguration clientConfiguration(){
         return ClientConfiguration.builder().connectedToLocalhost().build();
     }

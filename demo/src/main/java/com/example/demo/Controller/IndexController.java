@@ -32,7 +32,7 @@ public class IndexController {
     @GetMapping("/index")
     public RedirectView index() throws IOException{
         indexService.indexGames(); 
-        return new RedirectView("/gamesRepresentation");
+        return new RedirectView("/games");
     }
 
     @GetMapping("/games")
