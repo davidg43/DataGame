@@ -3,6 +3,8 @@ import ViewUsers from '../views/ViewUsers.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Game from '../views/Game.vue'
+import GameHome from '../views/GameHome.vue'
 //import Library from '../views/Library.vue'
 
 const router = createRouter({
@@ -22,6 +24,16 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/games',
+      name: 'games',
+      component: GameHome
+    },
+    {
+      path: '/game/:id',
+      name: 'game',
+      component: Game
     },
     /*{
       path: '/library',
