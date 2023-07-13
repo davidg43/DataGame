@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { Icon } from "@iconify/vue"
 //import getImage from "../lib/getImage"
 const router = useRouter()
-const gameId = router.currentRoute.value.params.id
+// const gameId = router.currentRoute.value.params.id
 const game = ref(null)
 
 game.value = await fetch(`localhost:8080/game/${game.id}`).then(res => res.json())
@@ -32,10 +32,6 @@ const {
     >
         <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
             <div class="pt-20 w-full h-full grid grid-cols-2 items-center">
-                <img
-                class="w-[400px] mx-auto rounded-lg"
-                :src="getImage(poster)"
-                />
                 <div>
                     <h1 class="text-4xl font-semibold mb-4">{{ title }}</h1>
                     <p class="text-sm text-neutral-300 w-2/3">{{ url }}</p>

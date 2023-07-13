@@ -1,20 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ViewUsers from '../views/ViewUsers.vue'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Game from '../views/Game.vue'
-import GameHome from '../views/GameHome.vue'
-//import Library from '../views/Library.vue'
+// import Home from '../view/Home.vue'
+import Login from '../view/Login.vue'
+import Register from '../view/Register.vue'
+import Game from '../view/Game.vue'
+import GameHome from '../view/GameHome.vue'
+// import Movie from "../view/Movie.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: Home
+    // },
     {
       path: '/login',
       name: 'login',
@@ -34,17 +33,17 @@ const router = createRouter({
       path: '/game/:id',
       name: 'game',
       component: Game
-    },
-    /*{
-      path: '/library',
-      name: 'library',
-      component: Library
-    },*/
-    {
-      path: '/view-users',
-      name: 'view-users',
-      component: ViewUsers
     }
+    // {
+    //   path: '/movies',
+    //   name: 'movies',
+    //   component: Movie
+    // },
+    // {
+    //   path: '/movies/:id',
+    //   name: 'movies',
+    //   component: Movie
+    // }
   ]
 })
 

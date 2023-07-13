@@ -26,10 +26,6 @@ const description = overview.length <= 60 ? overview : overview.slice(0, 60) + "
     >
         <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
             <div class="pt-20 w-full h-full grid grid-cols-2 items-center">
-                <img
-                class="w-[400px] mx-auto rounded-lg"
-                :src="getImage(poster)"
-                />
                 <div>
                     <h1 class="text-4xl font-semibold mb-4">{{ title }}</h1>
                     <p class="text-sm text-neutral-300 w-2/3">{{ url }}</p>
