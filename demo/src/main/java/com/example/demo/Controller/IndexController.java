@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,17 +38,27 @@ public class IndexController {
         return new RedirectView("/gamesRepresentation");
     }
 
+    @CrossOrigin(origins = "http://localhost:4000")
+    @GetMapping("/games/{id}")
+    public Game indexGames(@PathVariable int id) throws IOException{
+        return indexService.getGamesById(id).get();
+    } 
+
+    @CrossOrigin(origins = "http://localhost:4000")
     @GetMapping("/games")
     public List<Game> indexGames() throws IOException{
         return indexService.getGames();
     } 
+
+
+    
     @GetMapping("/gamesRepresentation")
     public List<GameRepresentation> indexGamesR() throws IOException{
         return indexService.getGamesRepresentations();
     } 
     
 
-
+    @CrossOrigin(origins = "http://localhost:4000")
     @GetMapping("/games/{query}")
     public List<Game> getGamesByQuery(
         @PathVariable(name = "query") String query,

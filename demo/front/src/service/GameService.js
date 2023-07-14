@@ -6,7 +6,7 @@ export default class GameService {
     index = "http://localhost:8080/index"
 
     getAll() {
-        return axios.get(this.url).then(response => response.data);
+        return fetch(this.url).then(response => response.json());
     }
 
     getByPlatform(name) {

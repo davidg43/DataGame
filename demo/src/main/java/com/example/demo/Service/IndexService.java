@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
@@ -134,6 +135,9 @@ public class IndexService {
        res.removeIf(g->!getGamesByPlatform(platform).contains(g));
        return res;
 
+    }
+    public Optional<Game> getGamesById(int id) {
+        return gameRepository.findById(id);
     }
 
 //Intentos busqueda por titulo multitermino.
