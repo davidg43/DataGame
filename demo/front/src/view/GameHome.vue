@@ -1,26 +1,18 @@
 <script setup>
-import { ref, onBeforeMount, defineAsyncComponent } from "vue"
-import GameService from "../service/GameService.js"
+import { ref, onBeforeMount } from "vue";
+import GameService from "../service/GameService.js";
 
-const games = GameService.getGames()
-//const bannerGame = ref(null)
+const gameService = new GameService();
+const games = ref([]);
 
-// const AsyncGameBanner = defineAsyncComponent(() => {
-//   return import("../components/GameBanner.vue")
-// })    
-
-// onBeforeMount(async() => {
-//   await getGames() 
-//   gameBanner.value = gaes.value[getRandomInt(0, games.value.length - 1)]
-// })
-
+onBeforeMount(async () => {
+  games.value = await gameService.getAll()
+  console.log(games.value)
+});
 </script>
 
 <template>
-    <!-- <AsyncBanner 
-    :gameBanner="gameBanner"
-    /> -->
-    <games 
-    :game="games"
-    />
+  <div v-if="games">
+    <Game :games="games" />
+  </div>
 </template>

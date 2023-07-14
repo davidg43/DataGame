@@ -1,86 +1,73 @@
 <script setup>
 import { useRouter } from "vue-router"
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Icon } from "@iconify/vue"
-//import getImage from "../lib/getImage"
+import axios from 'axios';
+
 const router = useRouter()
-// const gameId = router.currentRoute.value.params.id
+const gameId = router.currentRoute.value.params.id
 const game = ref(null)
 
-game.value = await fetch(`localhost:8080/game/${game.id}`).then(res => res.json())
-
-const {
-    id,
-    title,
-    released,
-    updated,
-    url,
-    rating,
-    ratingTop,
-    playTime,
-    achivement,
-    platform,
-    developers, 
-    genres
-} = game.value
-
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:8080/game/${gameId}`);
+    game.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+})
 </script>
 
-<template>
-    <div
-    class="h-screen w-screen grayscale-0"
-    >
-        <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
-            <div class="pt-20 w-full h-full grid grid-cols-2 items-center">
-                <div>
-                    <h1 class="text-4xl font-semibold mb-4">{{ title }}</h1>
-                    <p class="text-sm text-neutral-300 w-2/3">{{ url }}</p>
-                    <div class="flex flex-col text-sm gap-2 mt-3">
-                        <div class="flex items-center gap-2">
-                            <Icon icon="uiw:date" />
-                            <span>{{ released }}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="uiw:date" />
-                            <span>{{ updated }}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ic:round-star" />
-                            <span>{{ Math.round(rating) }}/10</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ ratingTop }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ rating }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ playTime }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ achivement }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ platform }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ developers }} </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <Icon icon="ion:people" />
-                            <span>{{ genres }} </span>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
 
+<template>
+  <div class="h-screen w-screen grayscale-0">
+    <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
+      <div class="pt-20 w-full h-full grid grid-cols-2 items-center" v-if="game.value">
+        <div>
+          <h1 class="text-4xl font-semibold mb-4">{{ game.value.title }}</h1>
+          <p class="text-sm text-neutral-300 w-2/3">{{ game.value.url }}</p>
+          <div class="flex flex-col text-sm gap-2 mt-3">
+            <div class="flex items-center gap-2">
+              <Icon icon="uiw:date" />
+              <span>{{ game.value.released }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="uiw:date" />
+              <span>{{ game.value.updated }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ic:round-star" />
+              <span>{{ Math.round(game.value.rating) }}/10</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.ratingTop }} </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.playTime }} </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.achievements }} </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.platform }} </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.developers }} </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon icon="ion:people" />
+              <span>{{ game.value.genres }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
+
+
