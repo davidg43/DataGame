@@ -37,7 +37,7 @@ const props = defineProps(['game'])
               <span>{{ game.released }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <Icon icon="uiw:date" />
+              <Icon icon="material-symbols:update" />
               <span>{{ game.updated }}</span>
             </div>
             <div class="flex items-center gap-2">
@@ -45,30 +45,30 @@ const props = defineProps(['game'])
               <span>{{ game.rating.lowerBound.value }}/10</span>
             </div>
             <div class="flex items-center gap-2">
-              <Icon icon="ion:people" />
+              <Icon icon="solar:ranking-bold" />
               <span>{{ game.ratingTop.lowerBound.value }} </span>
             </div>
             <div class="flex items-center gap-2">
-              <Icon icon="ion:people" />
+              <Icon icon="mdi:clock" />
               <span>{{ game.playTime }} </span>
             </div>
             <div class="flex items-center gap-2">
-              <Icon icon="ion:people" />
+              <Icon icon="solar:flag-bold" />
               <span>{{ game.achievements }} </span>
             </div>
             <div v-for="platform in game.platforms">
+              <Icon icon="icon-park:game-console" />
                <span> {{ platform }}</span>
               </div>
             <div class="flex items-center gap-2">
-              <Icon icon="ion:people" />
+              <Icon icon="iconoir:developer" />
               <div v-for="develop in game.developers">
                <span> {{ develop }}
               </span>
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <Icon icon="ion:people" />
-
+              <Icon icon="bxs:game" />
               <div v-for="genre in game.genres">
                <span> {{ genre }}</span>
               </div>
