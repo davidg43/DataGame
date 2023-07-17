@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import GameService from "../service/GameService.js";
 import Game from "./Game.vue";
 
@@ -8,10 +8,8 @@ const games = ref([]);
 const currentPage = ref(1);
 const gamesPerPage = 5;
 
-
 onBeforeMount(async () => {
-  games.value = await gameService.getAll()
-
+  games.value = await gameService.getAll();
 });
 
 const paginatedGames = computed(() => {
@@ -37,7 +35,6 @@ function prevPage() {
 }
 
 const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
-
 </script>
 
 <template>
@@ -63,4 +60,3 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
   height: 100vh; /* Ajusta la altura según tus necesidades */
 }
 </style>
-  
