@@ -4,8 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -53,8 +51,8 @@ public class IndexService {
         game.setTitle(entry.get(2));
         if(!entry.get(4).isEmpty())
             // game.setReleased(DateTe.parse(entry.get(4), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        game.setReleased(LocalDate.parse(entry.get(4), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        game.setUpdated(LocalDateTime.parse(entry.get(6), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
+        game.setReleased(LocalDate.parse(entry.get(4)));
+        game.setUpdated(LocalDateTime.parse(entry.get(6)));
         game.setURL(entry.get(7));
 
         game.setRating(Range.just(Double.parseDouble(entry.get(8))));
