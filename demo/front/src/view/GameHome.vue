@@ -40,7 +40,7 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
 <template>
   <div class="game-home-container">
     <h1>Game Home</h1>
-    <div v-for="game in paginatedGames" :key="game.id">
+    <div class="elemento" v-for="game in paginatedGames" :key="game.id">
       <Game :game="game" />
     </div>
     <div>
@@ -59,4 +59,14 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
   flex-direction: column;
   height: 100vh; /* Ajusta la altura según tus necesidades */
 }
+</style>
+
+<style>
+.elemento{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 </style>

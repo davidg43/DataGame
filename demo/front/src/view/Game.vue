@@ -25,9 +25,9 @@ const props = defineProps(['game'])
 
 
 <template>
-  <div class="h-screen w-screen grayscale-0">
+  <div  class="h-screen w-screen grayscale-0">
     <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
-      <div class="pt-20 w-full h-full grid grid-cols-2 items-center" v-if="game">
+      <div class="pt-20 w-full h-full items-center" v-if="game">
         <div>
           <h1 class="text-4xl font-semibold mb-4">{{ game.title }}</h1>
           <p class="text-sm text-neutral-300 w-2/3">{{ game.url }}</p>
