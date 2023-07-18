@@ -24,4 +24,12 @@ export default class GameService {
     updateIndex() {
         return axios.get(this.index).then(response => response.data);
     }
+
+    deleteGame(id) {
+        return axios.delete(this.url + "/" + id).then(response => response.data);
+    }
+
+    updateGame(game) {
+        return axios.put(this.url + "/" + game.id, game).then(response => response.data);
+    }
 }
