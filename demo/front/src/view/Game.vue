@@ -6,74 +6,59 @@ import axios from 'axios';
 import { Input } from "postcss";
 
 const router = useRouter()
-// const gameId = router.currentRoute.value.params.id
-// const game = ref({})
 const props = defineProps(['game'])
-
-
-
-
-// onMounted(async () => {
-//   try {
-//     const response = await fetch(`http://localhost:8080/games/${gameId}`);
-//     game.value = response.data;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// })
 </script>
 
-
 <template>
-  <div  class="h-screen w-screen grayscale-0">
-    <div class="w-full h-full bg-gradient-to-r from-black to-transparent">
-      <div class="pt-20 w-full h-full items-center" v-if="game">
-        <div>
-          <h1 class="text-4xl font-semibold mb-4">{{ game.title }}</h1>
-          <p class="text-sm text-neutral-300 w-2/3">{{ game.url }}</p>
-          <div class="flex flex-col text-sm gap-2 mt-3">
-            <div class="flex items-center gap-2">
-              <Icon icon="uiw:date" />
-              <span>{{ game.released }}</span>
+  <div class="game" v-if="game">
+    <div>
+      <h2 style="font-weight: bold; text-align: center;">{{ game.title }} </h2>
+      <h6 style="font-weight: inherit;" >{{ game.url }}</h6>
+      <br>
+      <div class="data">
+        <div class="row date1">
+          <Icon class="icon" icon="uiw:date" />
+          <span class="info">{{ game.released }}</span>
+        </div>
+        <div class="row date2">
+          <Icon class="icon" icon="material-symbols:update" />
+          <span class="info">{{ game.updated }}</span>
+        </div>
+        <div class="row rating">
+          <Icon class="icon" icon="ic:round-star" />
+          <span class="info">{{ game.rating.lowerBound.value }}/10</span>
+        </div>
+        <div class="row top">
+          <Icon class="icon" icon="solar:ranking-bold" />
+          <span class="info">{{ game.ratingTop.lowerBound.value }}</span>
+        </div>
+        <div class="row time">
+          <Icon class="icon" icon="mdi:clock" />
+          <span class="info">{{ game.playTime }}</span>
+        </div>
+        <div class="row achiv">
+          <Icon class="icon" icon="solar:flag-bold" />
+          <span class="info">{{ game.achievements }}</span>
+        </div>
+        <br>
+        <div v-for="platform in game.platform" :key="platform">
+            <div class="row platform"  v-if="platform != ''">
+              <Icon class="icon" icon="icon-park:game-console" />
+              <span class="info">{{ platform }}</span>
             </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="material-symbols:update" />
-              <span>{{ game.updated }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="ic:round-star" />
-              <span>{{ game.rating.lowerBound.value }}/10</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="solar:ranking-bold" />
-              <span>{{ game.ratingTop.lowerBound.value }} </span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="mdi:clock" />
-              <span>{{ game.playTime }} </span>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="solar:flag-bold" />
-              <span>{{ game.achievements }} </span>
-            </div>
-            <div v-for="platform in game.platforms">
-              <Icon icon="icon-park:game-console" />
-               <span> {{ platform }}</span>
-              </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="iconoir:developer" />
-              <div v-for="develop in game.developers">
-               <span> {{ develop }}
-              </span>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <Icon icon="bxs:game" />
-              <div v-for="genre in game.genres">
-               <span> {{ genre }}</span>
-              </div>
-    
-            </div>
+        </div>
+        <br>
+        <div v-for="develop in game.developers" :key="develop">
+           <div class="row develop" v-if="develop != ''">
+              <Icon class="icon" icon="iconoir:developer" />
+              <span class="info">{{ develop }}</span>
+           </div>
+        </div>
+        <br>
+        <div  v-for="genre in game.genres" :key="genre">
+          <div class="row genre" v-if="genre != ''">
+              <Icon class="icon" icon="bxs:game" />
+              <span class="info">{{ genre }}</span>
           </div>
         </div>
       </div>
@@ -81,3 +66,66 @@ const props = defineProps(['game'])
   </div>
 </template>
 
+
+
+<style>
+
+.game{
+  border: 0.5px solid whitesmoke;
+  display: flex;
+  padding: 6%;
+  margin-top: 10%;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+}
+
+.row{
+  display: grid;
+  align-items: center;
+  gap: 15%;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "icon info";
+}
+
+.icon{
+  justify-content: center;
+  grid-area: icon;
+}
+.info{
+  justify-content: center;
+  grid-area: info;
+}
+
+.data{
+  justify-content: center;
+}
+
+/* .game{
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 4px solid whitesmoke;
+}
+.data{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+  "icon info";
+  align-items: center;
+}
+
+.icon{
+  grid-area: icon;
+  grid-column: 1;
+  width: 30px;
+
+}
+.info{
+  grid-area: info;
+  grid-column: 2;
+} */
+
+
+</style>

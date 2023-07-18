@@ -10,6 +10,7 @@ const gamesPerPage = 5;
 
 onBeforeMount(async () => {
   games.value = await gameService.getAll();
+  console.log(games.value);
 });
 
 const paginatedGames = computed(() => {
@@ -57,7 +58,7 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh; /* Ajusta la altura según tus necesidades */
+  height: 70%; /* Ajusta la altura según tus necesidades */
 }
 </style>
 
@@ -67,6 +68,8 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 60%;
+  min-width: 665px;
 }
 
 </style>
