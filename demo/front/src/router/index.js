@@ -4,7 +4,8 @@ import Login from '../view/Login.vue'
 import Register from '../view/Register.vue'
 import Game from '../view/Game.vue'
 import GameHome from '../view/GameHome.vue'
-// import Movie from "../view/Movie.vue"
+import AddGame from "../view/AddGame.vue"
+import EditGame from "../view/EditGame.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,17 +34,17 @@ const router = createRouter({
       path: '/game/:id',
       name: 'game',
       component: Game
+    },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      component: EditGame
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddGame
     }
-    // {
-    //   path: '/movies',
-    //   name: 'movies',
-    //   component: Movie
-    // },
-    // {
-    //   path: '/movies/:id',
-    //   name: 'movies',
-    //   component: Movie
-    // }
   ]
 })
 

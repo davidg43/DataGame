@@ -1,3 +1,22 @@
+<template>
+  <div class="game-home-container">
+    <h1>Game Home</h1>
+    <div class="add-game-button">
+      <router-link to="/add-game">
+        <button>Add Game</button>
+      </router-link>
+    </div>
+    <div class="elemento" v-for="game in paginatedGames" :key="game.id">
+      <Game :game="game" />
+    </div>
+    <div>
+      <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import { ref, onBeforeMount, computed } from "vue";
 import GameService from "../service/GameService.js";
@@ -10,7 +29,6 @@ const gamesPerPage = 5;
 
 onBeforeMount(async () => {
   games.value = await gameService.getAll();
-  console.log(games.value);
 });
 
 const paginatedGames = computed(() => {
@@ -38,38 +56,21 @@ function prevPage() {
 const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
 </script>
 
-<template>
-  <div class="game-home-container">
-    <h1>Game Home</h1>
-    <div class="elemento" v-for="game in paginatedGames" :key="game.id">
-      <Game :game="game" />
-    </div>
-    <div>
-      <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
-      <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-    </div>
-  </div>
-</template>
-
-<style>
-.game-home-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 70%; /* Ajusta la altura según tus necesidades */
-}
-</style>
-
-<style>
-.elemento{
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  min-width: 665px;
+<style scoped>
+.add-game-button {
+  margin-bottom: 20px;
 }
 
+.add-game-button button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-game-button button:hover {
+  background-color: #0056b3;
+}
 </style>
