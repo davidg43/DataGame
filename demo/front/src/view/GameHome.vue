@@ -2,13 +2,14 @@
   <div class="game-home-container">
     <h1>Game Home</h1>
     <div class="add-game-button">
-      <router-link to="/add-game">
+      <router-link to="/add">
         <button>Add Game</button>
       </router-link>
     </div>
     <div style="min-width: 675px; display: flex; justify-content: center;" class="elemento" v-for="game in paginatedGames" :key="game.id">
       <Game :game="game" />
     </div>
+
     <div>
       <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
       <span>{{ currentPage }} / {{ totalPages }}</span>
@@ -53,6 +54,8 @@ function prevPage() {
   }
 }
 
+
+
 const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
 </script>
 
@@ -73,4 +76,8 @@ const totalPages = computed(() => Math.ceil(games.value.length / gamesPerPage));
 .add-game-button button:hover {
   background-color: #0056b3;
 }
+
+
+
+
 </style>

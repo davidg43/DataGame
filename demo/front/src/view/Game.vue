@@ -10,22 +10,27 @@ const router = useRouter()
 const props = defineProps(['game'])
 const showConfirmationDialog = ref(false);
 
+
 function formatDateTime(dateTimeString) {
   dateTimeString = dateTimeString.replace("T", " ");
   return dateTimeString;
-}
 
-function deleteGame() {
+  function deleteGame() {
   const gameService = new GameService();
   gameService.deleteGame(game.id);
   router.push({ name: "GameHome" });
-  showConfirmationDialog.value = false;
+  showConfirmationDialog.value = true;
 }
 
 function editGame() {
   router.push({ name: "EditGame", params: { id: game.id } });
 }
+}
+
+
+
 </script>
+
 
 <template>
   <div class="game" v-if="game">
@@ -83,10 +88,11 @@ function editGame() {
           </div>
         </div>
         <br>
-        <div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap: 10px;" class="buttons">
           <button class="update" @click="editGame">Edit</button>
           <button class="delete" @click="showConfirmationDialog = true">Delete</button>
         </div>
+
         <div v-if="showConfirmationDialog" class="confirmation-dialog">
           <p>¿Estás seguro de que deseas eliminar este juego?</p>
           <div class="buttons">
@@ -94,6 +100,8 @@ function editGame() {
             <button @click="showConfirmationDialog = false">Cancelar</button>
           </div>
         </div>
+
+        
       </div>
     </div>
   </div>
@@ -135,7 +143,6 @@ function editGame() {
 }
 
 .update {
-  position: absolute;
   bottom: 10px;
   right: 10px;
   padding: 8px 16px;
@@ -147,7 +154,6 @@ function editGame() {
 }
 
 .delete {
-  position: absolute;
   bottom: 10px;
   right: 70px;
   padding: 8px 16px;
@@ -159,9 +165,9 @@ function editGame() {
 }
 
 .confirmation-dialog {
-  position: absolute;
-  bottom: 60px;
-  right: 10px;
+  text-align: center;
+
+  color: #000000;
   padding: 16px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -182,7 +188,7 @@ function editGame() {
   margin-left: 10px;
   padding: 8px 16px;
   background-color: #007bff;
-  color: #fff;
+  color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -191,7 +197,4 @@ function editGame() {
 .confirmation-dialog button:last-child {
   background-color: #dc3545;
 }
-
-
-
 </style>

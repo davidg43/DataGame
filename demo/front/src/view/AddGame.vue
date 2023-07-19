@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div class="container">
       <h2>Add Game</h2>
-      <form @submit="addGame">
+      <div class="forms">
+        <form @submit="addGame">
         <div>
           <label for="title">Title:</label>
           <input type="text" id="title" v-model="newGame.title" />
@@ -42,8 +43,14 @@
           <label for="genres">Genres:</label>
           <input type="text" id="genres" v-model="newGame.genres" />
         </div>
-        <button type="submit">Add</button>
+        <div class="add">
+          <router-link to="/games">
+            <button id="add" style= "width: 100%; height: 100%;">Add</button>
+          </router-link>
+        </div>
       </form>
+        
+      </div>
     </div>
   </template>
   
@@ -86,6 +93,15 @@
   </script>
   
   <style>
+
+
+  .container{
+    margin:auto;
+    padding: auto;
+    width: 70%;
+  }
+  
+  
   label {
     display: block;
     font-weight: bold;
@@ -100,18 +116,22 @@
     margin-top: 5px;
   }
   
-  button {
+  .add {
     margin-top: 10px;
-    padding: 5px 10px;
+    height: 50px;
+    text-align: center;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
   }
+
   
-  button:hover {
-    background-color: #0056b3;
-  }
+ 
+  #add:hover {
+    background-color: green;
+    }
+
+
   </style>
   
