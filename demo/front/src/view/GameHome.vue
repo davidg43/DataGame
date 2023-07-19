@@ -6,7 +6,7 @@
         <button>Add Game</button>
       </router-link>
     </div>
-    <div class="elemento" v-for="game in paginatedGames" :key="game.id">
+    <div style="min-width: 675px; display: flex; justify-content: center;" class="elemento" v-for="game in paginatedGames" :key="game.id">
       <Game :game="game" />
     </div>
     <div>

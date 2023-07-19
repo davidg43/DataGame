@@ -192,31 +192,6 @@ function editGame() {
   background-color: #dc3545;
 }
 
-/* .game{
-  margin-top: 10%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border: 4px solid whitesmoke;
-}
-.data{
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-  "icon info";
-  align-items: center;
-}
-
-.icon{
-  grid-area: icon;
-  grid-column: 1;
-  width: 30px;
-
-}
-.info{
-  grid-area: info;
-  grid-column: 2;
-} */
 
 
 </style>
