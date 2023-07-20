@@ -137,6 +137,27 @@ public class IndexService {
     public Optional<Game> getGamesById(int id) {
         return gameRepository.findById(id);
     }
+    public void updateGame(Integer id, Game game) {
+        Game old = gameRepository.findById(id).get();
+        old.setTitle(game.getTitle());
+        old.setAchievements(game.getAchievements());
+        old.setDevelopers(game.getDevelopers());
+        old.setGenres(game.getGenres());
+        old.setPlatform(game.getPlatform());
+        old.setPlayTime(game.getPlayTime());
+        old.setRating(game.getRating());
+        old.setRatingTop(game.getRatingTop());
+        old.setReleased(game.getReleased());
+        old.setURL(game.getURL());
+        old.setUpdated(game.getUpdated());
+        gameRepository.save(old);
+    }
+    public void deleteGame(Integer id) {
+        gameRepository.deleteById(id);
+    }
+    public void add(Game game) {
+        gameRepository.save(game);
+    }
 
 //Intentos busqueda por titulo multitermino.
 

@@ -26,10 +26,10 @@ export default class GameService {
     }
 
     deleteGame(id) {
-        return axios.delete(this.url + "/" + id).then(response => response.data);
+        return axios.delete("/delete/" + id).then(response => response.data);
     }
 
-    updateGame(game) {
-        return axios.put(this.url + "/" + game.id, game).then(response => response.data);
+    updateGame(id) {
+        return axios.put("/edit/" + id).then(response => response.data);
     }
 }
