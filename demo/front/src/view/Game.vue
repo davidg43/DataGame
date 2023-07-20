@@ -5,15 +5,16 @@ import { Icon } from "@iconify/vue"
 import axios from 'axios';
 import { Input } from "postcss";
 import GameService from "../service/GameService.js";
+import EditGame from "../view/EditGame.vue"
 
 const router = useRouter()
 const props = defineProps(['game'])
 const showConfirmationDialog = ref(false);
 
-
 function formatDateTime(dateTimeString) {
   dateTimeString = dateTimeString.replace("T", " ");
   return dateTimeString;
+}
 
   function deleteGame() {
   const gameService = new GameService();
@@ -22,16 +23,17 @@ function formatDateTime(dateTimeString) {
   showConfirmationDialog.value = true;
 }
 
-function editGame() {
-  router.push({ name: "EditGame", params: { id: game.id } });
+function editGame(id) {
+  console.log(id);
+  router.push({
+    path: '/game/:id',
+    params: { id: id },
+    name: 'edit',
+    component: EditGame,
+});
 }
-}
-
-
 
 </script>
-
-
 <template>
   <div class="game" v-if="game">
     <div style="width: 100%;">
@@ -89,7 +91,7 @@ function editGame() {
         </div>
         <br>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap: 10px;" class="buttons">
-          <button class="update" @click="editGame">Edit</button>
+          <button class="update" @click="editGame(game.id)">Edit</button>
           <button class="delete" @click="showConfirmationDialog = true">Delete</button>
         </div>
 

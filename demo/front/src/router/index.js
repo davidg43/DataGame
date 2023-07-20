@@ -31,11 +31,6 @@ const router = createRouter({
       component: GameHome
     },
     {
-      path: '/game/:id',
-      name: 'game',
-      component: Game
-    },
-    {
       path: '/edit/:id',
       name: 'edit',
       component: EditGame
