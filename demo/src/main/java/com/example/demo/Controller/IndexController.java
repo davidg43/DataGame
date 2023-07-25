@@ -50,6 +50,7 @@ public class IndexController {
 
 
      // ########################### Create ###########################
+     @PostMapping("/create")
      public void createGame(@RequestBody Game game){
         indexService.add(game);
     }
