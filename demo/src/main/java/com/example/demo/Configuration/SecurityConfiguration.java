@@ -52,13 +52,17 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider());
-        http.csrf().disable().authorizeRequests().
-            antMatchers("/index").authenticated().and().
-            formLogin().usernameParameter("nombre").
-            passwordParameter("password");
-        http.headers().frameOptions().sameOrigin();
- 
+        http.csrf().disable().authorizeRequests().anyRequest().permitAll();     
         return http.build();
+
+        // http.authenticationProvider(authenticationProvider());
+        // http.csrf().disable().authorizeRequests().
+        //     antMatchers("/index").authenticated().and().
+        //     formLogin().usernameParameter("nombre").
+        //     passwordParameter("password");
+        // http.headers().frameOptions().sameOrigin();
+ 
+        // return http.build();
     }
  
     @Bean
