@@ -39,6 +39,7 @@ public class IndexController {
         return new RedirectView("/games");
 
     }
+    
 
     // ########################### Delete ###########################
     @GetMapping("/delete/{id}")
@@ -100,6 +101,11 @@ public class IndexController {
                 throw new IllegalArgumentException("Invalid query: " + query);
         }
     }
+
+    @GetMapping("/game/{id}")
+    public Game getGameById(@PathVariable int id) throws IOException{
+        return indexService.getGamesById(id).get();
+    } 
 
 
 

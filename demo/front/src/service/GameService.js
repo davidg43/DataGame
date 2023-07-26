@@ -32,4 +32,7 @@ export default class GameService {
     updateGame(id) {
         return axios.put("/edit/" + id).then(response => response.data);
     }
+    getById(id) {
+        return axios.get("/game/" + id).then(response => response.data);
+    }
 }

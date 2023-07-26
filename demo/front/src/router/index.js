@@ -6,7 +6,7 @@ import Game from '../view/Game.vue'
 import GameHome from '../view/GameHome.vue'
 import AddGame from "../view/AddGame.vue"
 import EditGame from "../view/EditGame.vue"
-//import OneGame from "../view/OneGame.vue"
+import OneGame from "../view/OneGame.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,12 +40,12 @@ const router = createRouter({
       path: '/add',
       name: 'add',
       component: AddGame
+    },
+    {
+      path: '/game/:id',
+      name: 'game',
+      component: OneGame
     }
-    // {
-    //   path: '/game/:id',
-    //   name: 'game',
-    //   component: OneGame
-    // }
   ]
 })
 

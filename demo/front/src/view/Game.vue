@@ -6,6 +6,8 @@ import axios from 'axios';
 import { Input } from "postcss";
 import GameService from "../service/GameService.js";
 import EditGame from "../view/EditGame.vue"
+import OneGame from "../view/OneGame.vue"
+
 
 const router = useRouter()
 const props = defineProps(['game'])
@@ -26,12 +28,23 @@ function formatDateTime(dateTimeString) {
 function editGame(id) {
   console.log(id);
   router.push({
-    path: '/game/:id',
+    path: '/edit/:id',
     params: { id: id },
     name: 'edit',
     component: EditGame,
 });
 }
+
+function viewDetails(id) {
+  console.log(id);
+  router.push({
+    path: '/game/:id',
+    params: { id: id },
+    name: 'game',
+    component: OneGame,
+});
+}
+
 
 </script>
 <template>
