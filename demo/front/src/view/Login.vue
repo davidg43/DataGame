@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import Layout from './Layout.vue';
 
 const username = ref('');
 const password = ref('');
@@ -11,25 +12,26 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div>
-    <Navbar />
-    <div class="content">
-      <div class="login-form">
-        <h2>Login</h2>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label>Username</label>
-            <input type="text" v-model="username" required>
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" v-model="password" required>
-          </div>
-          <button type="submit">Login</button>
-        </form>
+  <Layout>
+    <div>
+      <div class="content">
+        <div class="login-form">
+          <h2>Login</h2>
+          <form @submit.prevent="handleSubmit">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" v-model="username" required>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" v-model="password" required>
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <style scoped>

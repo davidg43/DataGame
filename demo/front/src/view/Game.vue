@@ -90,7 +90,8 @@ function editGame(id) {
           </div>
         </div>
         <br>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap: 10px;" class="buttons">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap: 10px;" class="buttons">
+          <button class="view" @click="viewDetails(game.id)">View Details</button>
           <button class="update" @click="editGame(game.id)">Edit</button>
           <button class="delete" @click="showConfirmationDialog = true">Delete</button>
         </div>
@@ -101,15 +102,11 @@ function editGame(id) {
             <button @click="deleteGame">Confirmar</button>
             <button @click="showConfirmationDialog = false">Cancelar</button>
           </div>
-        </div>
-
-        
+        </div>       
       </div>
     </div>
   </div>
 </template>
-
-
 
 <style>
 
@@ -142,6 +139,17 @@ function editGame(id) {
 
 .data{
   justify-content: center;
+}
+
+.view {
+  bottom: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background-color: #0abd0d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .update {

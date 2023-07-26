@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue';
+import Layout from './Layout.vue';
+
 
 const email = ref('');
 const username = ref('');
@@ -23,46 +25,48 @@ const handleSubmit = () => {
 
 
 <template>
-  <div>
-    <Navbar />
-    <div class="content">
-      <div class="register-form">
-        <h2>Register</h2>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" v-model="email" required>
-          </div>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" v-model="username" required>
-          </div>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" v-model="name" required>
-          </div>
-          <div class="form-group">
-            <label for="surname">Surname</label>
-            <input type="text" id="surname" v-model="surname" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" v-model="password" required>
-          </div>
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" v-model="confirmPassword" required>
-          </div>
-          <button type="submit">Register</button>
-        </form>
+  <Layout>
+    <div>
+      <Navbar />
+      <div class="content">
+        <div class="register-form">
+          <h2>Register</h2>
+          <form @submit.prevent="handleSubmit">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" v-model="email" required>
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" v-model="username" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" v-model="name" required>
+            </div>
+            <div class="form-group">
+              <label for="surname">Surname</label>
+              <input type="text" id="surname" v-model="surname" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" v-model="password" required>
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" v-model="confirmPassword" required>
+            </div>
+            <button type="submit">Register</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <style scoped>
 .content {
-  margin-top: 100px; /* Ajusta el valor según el tamaño del Navbar */
+  margin-top: 100px;
 }
 .register-form {
   max-width: 400px;

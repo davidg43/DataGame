@@ -1,4 +1,5 @@
 <template>
+  <Layout>
     <div class="container">
       <h2>Add Game</h2>
       <div class="forms">
@@ -52,7 +53,8 @@
         
       </div>
     </div>
-  </template>
+  </Layout>
+</template>
   
   <script>
   export default {
@@ -91,14 +93,19 @@
     },
   };
   </script>
+
+<script setup>
+import Layout from "./Layout.vue"; // Adjust the path based on your project structure
+</script>
   
   <style>
 
-
-  .container{
+.container{
     margin:auto;
-    padding: auto;
     width: 70%;
+    padding: 20px;
+    background-color: #434343;
+    border-radius: 8px;
   }
   
   
@@ -114,6 +121,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
+    color: #000000;
   }
   
   .add {

@@ -1,27 +1,30 @@
 <template>
-  <div class="game-home-container">
-    <h1>Game Home</h1>
-    <div class="add-game-button">
-      <router-link to="/add">
-        <button>Add Game</button>
-      </router-link>
-    </div>
-    <div style="min-width: 675px; display: flex; justify-content: center;" class="elemento" v-for="game in paginatedGames" :key="game.id">
-      <Game :game="game" />
-    </div>
+  <Layout>
+    <div class="game-home-container">
+      <h1>Game Home</h1>
+      <div class="add-game-button">
+        <router-link to="/add">
+          <button>Add Game</button>
+        </router-link>
+      </div>
+      <div style="min-width: 675px; display: flex; justify-content: center;" class="elemento" v-for="game in paginatedGames" :key="game.id">
+        <Game :game="game" />
+      </div>
 
-    <div>
-      <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
-      <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      <div>
+        <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onBeforeMount, computed } from "vue";
 import GameService from "../service/GameService.js";
 import Game from "./Game.vue";
+import Layout from './Layout.vue';
 
 const gameService = new GameService();
 const games = ref([]);
