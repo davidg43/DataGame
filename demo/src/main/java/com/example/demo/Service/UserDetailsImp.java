@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +26,9 @@ public class UserDetailsImp implements UserDetails{
 
 
     public static UserDetailsImp build(User user){
-       List<GrantedAuthority> authorities = user.getRole().stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
-
+        
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
          return new UserDetailsImp(user.getId(),
          user.getUsername(),
          user.getEmail(),
