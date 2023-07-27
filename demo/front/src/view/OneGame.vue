@@ -6,22 +6,41 @@ import GameService from "../service/GameService.js";
 import Layout from './Layout.vue';
 
 const router = useRouter()
-const gameService = new GameService();
-const props = defineProps(["game"]);
-const game = ref([]);
+const props = defineProps(['game'])
+const showConfirmationDialog = ref(false);
+const game = ref(null);
+const gameService = new GameService(); 
+const id = $route.params.id;
+
+
+function formatDateTime(dateTimeString) {
+  return dateTimeString ? dateTimeString.replace("T", " ") : "N/A";
+}
+
+function deleteGame() {
+  gameService.deleteGame(game.value.id); 
+  router.push({ name: "GameHome" });
+  showConfirmationDialog.value = true;
+}
 
 async function obtainGame() {
-  game.value = await gameService.getById(props.game.id);
+  try {
+    game.value = await gameService.getById(props.game.id); 
+  } catch (error) {
+    console.error("Error fetching game:", error);
+  }
 }
+
 onMounted(() => {
   obtainGame();
 });
 
 </script>
 
+
 <template>
   <Layout>
-    <div class="one-game">
+    <div class="one-game" v-if="game">
       <div style="width: 100%;">
         <h2 style="font-weight: bold; text-align: center;">{{ game.title }} </h2>
         <h6 style="font-weight: inherit; text-align: center;" >{{ game.url }}</h6>
@@ -35,6 +54,7 @@ onMounted(() => {
             <Icon class="icon" icon="material-symbols:update" />
             <span class="info">{{ formatDateTime(game.updated) }}</span>
           </div>
+          <div v-if="game.rating && game.rating.lowerBound">
           <div class="row rating">
             <Icon class="icon" icon="ic:round-star" />
             <span class="info">{{ game.rating.lowerBound.value }}/10</span>
@@ -42,6 +62,7 @@ onMounted(() => {
           <div class="row top">
             <Icon class="icon" icon="solar:ranking-bold" />
             <span class="info">{{ game.ratingTop.lowerBound.value }}</span>
+          </div>
           </div>
           <div class="row time">
             <Icon class="icon" icon="mdi:clock" />
