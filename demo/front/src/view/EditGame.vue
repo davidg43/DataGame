@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import Layout from "./Layout.vue"; // Adjust the path based on your project structure
+import Layout from "./Layout.vue"; 
 </script>
   
   <style>

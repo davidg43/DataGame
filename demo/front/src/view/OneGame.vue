@@ -1,46 +1,48 @@
 <script setup>
+import { ref, watch, onBeforeMount } from "vue";
 import { useRouter } from "vue-router"
-import { ref, onMounted } from "vue";
 import { Icon } from "@iconify/vue"
 import GameService from "../service/GameService.js";
 import Layout from './Layout.vue';
 
-const router = useRouter()
-const props = defineProps(['game'])
-const showConfirmationDialog = ref(false);
 const game = ref(null);
-const gameService = new GameService(); 
-const id = $route.params.id;
+const gameService = new GameService();
+const router = useRouter();
 
+onBeforeMount(async () => {
+  const gameId = router.currentRoute.value.params.id;
+  game.value = await gameService.getById(gameId);
+  console.log(game.value);
+});
+
+  console.log(router.currentRoute.value.params.id);
+
+
+// async created() {
+//   console.log("hola");
+//   const gameId = this.$route.params.id;
+//   game.value = await gameService.getById(gameId);
+//   console.log(gameId);
+// }
+
+
+//   watch(() => router.currentRoute.value.params.id, async (newId) => {
+//     console.log("hola");
+//   game.value = await gameService.getById(gameId);
+//   console.log(id);
+
+// });
 
 function formatDateTime(dateTimeString) {
   return dateTimeString ? dateTimeString.replace("T", " ") : "N/A";
 }
-
-function deleteGame() {
-  gameService.deleteGame(game.value.id); 
-  router.push({ name: "GameHome" });
-  showConfirmationDialog.value = true;
-}
-
-async function obtainGame() {
-  try {
-    game.value = await gameService.getById(props.game.id); 
-  } catch (error) {
-    console.error("Error fetching game:", error);
-  }
-}
-
-onMounted(() => {
-  obtainGame();
-});
 
 </script>
 
 
 <template>
   <Layout>
-    <div class="one-game" v-if="game">
+    <div class="game" v-if="game">
       <div style="width: 100%;">
         <h2 style="font-weight: bold; text-align: center;">{{ game.title }} </h2>
         <h6 style="font-weight: inherit; text-align: center;" >{{ game.url }}</h6>

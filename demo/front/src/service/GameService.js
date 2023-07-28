@@ -30,9 +30,9 @@ export default class GameService {
     }
 
     updateGame(id) {
-        return axios.put("/edit/" + id).then(response => response.data);
+        return fetch("http://localhost:8080/edit/" + id).then(response => response.json());
     }
     getById(id) {
-        return axios.get("/game/" + id).then(response => response.data);
+        return fetch("http://localhost:8080/game/" + id).then(response => response.json());
     }
 }

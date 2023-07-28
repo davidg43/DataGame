@@ -10,7 +10,6 @@
       <div style="min-width: 675px; display: flex; justify-content: center;" class="elemento" v-for="game in paginatedGames" :key="game.id">
         <Game :game="game" />
       </div>
-
       <div>
         <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
         <span>{{ currentPage }} / {{ totalPages }}</span>
@@ -24,6 +23,7 @@
 import { ref, onBeforeMount, computed } from "vue";
 import GameService from "../service/GameService.js";
 import Game from "./Game.vue";
+import Home from "./Home.vue";
 import Layout from './Layout.vue';
 
 const gameService = new GameService();
