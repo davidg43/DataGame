@@ -31,6 +31,11 @@ public class UserController {
         return ResponseEntity.ok("User created");
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+        return ResponseEntity.ok(userService.getToken(user.getName()) + "User Logged");
+    }
+
     // @GetMapping(value="/prueba")
     // public List<User> getMethodName(@RequestParam String param) {
     //     System.out.println(userService.getAll());

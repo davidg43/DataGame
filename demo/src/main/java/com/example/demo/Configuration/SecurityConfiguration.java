@@ -38,16 +38,13 @@ public class SecurityConfiguration {
 
         return http
             .csrf().disable()
-            .authorizeRequests().antMatchers("/register").permitAll()
+            .authorizeRequests().antMatchers( "/login").permitAll()
             .anyRequest()
             .authenticated()
-            .and()
-            .httpBasic()
             .and()
             .sessionManagement()   
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .addFilter(filter)
             .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }

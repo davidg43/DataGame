@@ -1,18 +1,13 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.model.Objects.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 public class UserDetailsImp implements UserDetails{
 
@@ -22,18 +17,14 @@ public class UserDetailsImp implements UserDetails{
     @JsonIgnore
     private String password;
 
-    private Collection <? extends GrantedAuthority> authorities;
 
 
+    @Builder
     public static UserDetailsImp build(User user){
-        
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
          return new UserDetailsImp(user.getId(),
          user.getUsername(),
          user.getEmail(),
-         user.getPassword(),
-         authorities);
+         user.getPassword());
     }
 
     public Integer getId(){
@@ -46,7 +37,7 @@ public class UserDetailsImp implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       return authorities;
+       return null;
     }
 
     @Override
@@ -79,13 +70,11 @@ public class UserDetailsImp implements UserDetails{
         return true;
     }
 
-    public UserDetailsImp(Integer id, String username,      String   email, String password,
-        Collection<GrantedAuthority> authorities2) {
+    public UserDetailsImp(Integer id, String username,      String   email, String password) {
             this.id = id;
             this.username = username;
             this.email = email;
             this.password = password;
-            this.authorities = authorities2;
                 
     }
     

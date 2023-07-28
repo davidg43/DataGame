@@ -1,19 +1,14 @@
 package com.example.demo.model.Objects;
 
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.example.demo.configuration.Roles;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -43,8 +38,6 @@ public class User {
     @Column
     private String email;
 
-    @Column
-    private Roles role;
 
     @OneToOne(cascade = CascadeType.ALL)
     GameLibrary library;
