@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Objects.User;
 import com.example.demo.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @ResponseBody
@@ -25,4 +30,11 @@ public class UserController {
         userService.save(user);
         return ResponseEntity.ok("User created");
     }
+
+    // @GetMapping(value="/prueba")
+    // public List<User> getMethodName(@RequestParam String param) {
+    //     System.out.println(userService.getAll());
+    //     return userService.getAll();
+    // }
+    
 }

@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
    List<User> findAll();
    // @Query("SELECT u FROM User u WHERE u.username = :name")
    Optional<User>findOPTByName(String name);
+   
 }
