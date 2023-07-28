@@ -1,4 +1,4 @@
-package com.example.demo.Configuration;
+package com.example.demo.configuration;
 
 import java.util.Collections;
 
@@ -12,8 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.demo.Service.UserDetailsImp;
-import com.example.demo.Utils.TokenUtils;
+import com.example.demo.service.UserDetailsImp;
+import com.example.demo.utils.TokenUtils;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;

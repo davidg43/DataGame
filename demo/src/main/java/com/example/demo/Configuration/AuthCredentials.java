@@ -1,4 +1,4 @@
-package com.example.demo.Configuration;
+package com.example.demo.configuration;
 
 import lombok.Data;
 

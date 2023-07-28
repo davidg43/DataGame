@@ -1,4 +1,4 @@
-package com.example.demo.Configuration;
+package com.example.demo.configuration;
 
 import java.util.Collection;
 import java.util.Collections;
