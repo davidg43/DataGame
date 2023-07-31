@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   export default {
     props: {
       game: {
@@ -21,52 +21,78 @@
       },
     },
   };
+  </script> -->
+  
+  <script setup>
+  import { ref, watch, onBeforeMount, computed } from "vue";
+  import { useRouter } from "vue-router"
+  import { Icon } from "@iconify/vue"
+  import GameService from "../service/GameService.js";
+  import Layout from './Layout.vue';
+  
+  const game = ref(null);
+  const gameService = new GameService();
+  const router = useRouter();
+  
+  onBeforeMount(async () => {
+    const gameId = router.currentRoute.value.params.id;
+    game.value = await gameService.getById(gameId);
+    console.log(game.value);
+  });
+
+  function formatDateTime(dateTimeString) {
+    return dateTimeString ? dateTimeString.replace("T", " ") : "N/A";
+  }
+
+  const formattedUpdated = computed(() => formatDateTime(game.value.updated));
+  
   </script>
+
 
 <template>
   <Layout>
-    <div class="container">
+    <div class="updateform" v-if="game">
       <h2>Edit Game</h2>
       <form @submit="updateGame">
         <div>
           <label for="title">Title:</label>
-          <input type="text" id="title" v-model="editedGame.title" />
+          <input type="text" id="title" v-model="game.title" />
         </div>
         <div>
           <label for="url">URL:</label>
-          <input type="text" id="url" v-model="editedGame.url" />
+          <input type="text" id="url" v-model="game.url" />
         </div>
         <div>
           <label for="released">Released:</label>
-          <input type="text" id="released" v-model="editedGame.released" />
+          <input type="text" id="released" v-model="game.released" />
         </div>
         <div>
           <label for="updated">Updated:</label>
-          <input type="text" id="updated" v-model="editedGame.updated" />
+          <input type="text" id="updated" v-model="formattedUpdated" />
         </div>
         <div>
           <label for="rating">Rating:</label>
-          <input type="text" id="rating" v-model="editedGame.rating" />
+          <input type="text" id="rating" v-model="game.rating" />
         </div>
         <div>
           <label for="playTime">Play Time:</label>
-          <input type="text" id="playTime" v-model="editedGame.playTime" />
+          <input type="text" id="playTime" v-model="game.playTime" />
         </div>
         <div>
           <label for="achievements">Achievements:</label>
-          <input type="text" id="achievements" v-model="editedGame.achievements" />
+          <input type="text" id="achievements" v-model="game.achievements" />
         </div>
         <div>
           <label for="platforms">Platforms:</label>
-          <input type="text" id="platforms" v-model="editedGame.platforms" />
+          <input type="text" id="platforms" v-model="game.platforms" />
         </div>
         <div>
           <label for="developers">Developers:</label>
-          <input type="text" id="developers" v-model="editedGame.developers" />
+          <input type="text" id="developers" v-model="game.developers" />
         </div>
         <div>
           <label for="genres">Genres:</label>
-          <input type="text" id="genres" v-model="editedGame.genres" />
+          <input type="text" id="genres" v-model="game.genres" />
         </div>
         <div class="edit">
           <router-link to="/games">
@@ -77,27 +103,24 @@
     </div>
   </Layout>
 </template>
-
-<script setup>
-import Layout from "./Layout.vue"; 
-</script>
   
-  <style>
+<style>
 
-  .container{ 
+.uopdateform {
     margin:auto;
     width: 70%;
     padding: 20px;
     background-color: #434343;
     border-radius: 8px;
   }
-
+  
+  
   label {
     display: block;
     font-weight: bold;
     margin-top: 10px;
   }
-
+  
   input[type="text"] {
     width: 100%;
     padding: 5px;
@@ -106,7 +129,7 @@ import Layout from "./Layout.vue";
     margin-top: 5px;
     color: #000000;
   }
-
+  
   .edit {
     margin-top: 10px;
     height: 50px;
@@ -117,8 +140,12 @@ import Layout from "./Layout.vue";
     border-radius: 4px;
   }
 
+  
+ 
   #edit:hover {
     background-color: green;
     }
+
+
   </style>
   

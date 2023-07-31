@@ -98,7 +98,7 @@
 import Layout from "./Layout.vue"; // Adjust the path based on your project structure
 </script>
   
-  <style>
+<style>
 
 .container{
     margin:auto;
