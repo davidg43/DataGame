@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +35,7 @@ public class IndexController {
     } 
 
     // ########################### Edit ###########################
-    @PostMapping("/edit/{id}")
+    @PutMapping("/edit/{id}")
     public RedirectView updateGame(@PathVariable(name = "id") Integer id, @RequestBody Game game){
         indexService.updateGame(id, game);
         return new RedirectView("/games");
@@ -42,7 +44,7 @@ public class IndexController {
     
 
     // ########################### Delete ###########################
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteGame(@PathVariable Integer id){
         indexService.deleteGame(id);
     }

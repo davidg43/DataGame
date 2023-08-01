@@ -44,8 +44,27 @@
     return dateTimeString ? dateTimeString.replace("T", " ") : "N/A";
   }
 
-  const formattedUpdated = computed(() => formatDateTime(game.value.updated));
-  
+  //const formattedUpdated = computed(() => formatDateTime(game.value.updated));
+
+  // function updateGame(id) {
+  //   gameService.updateGame(id);
+  //   console.log('Edited Game:', id);
+  // }
+
+  function updateGame(id) {
+  return new Promise((resolve, reject) => {
+    gameService.updateGame(id)
+      .then(response => {
+        console.log('Edited Game:', id);
+        resolve(response); // Resolves the promise with the response from gameService.updateGame
+      })
+      .catch(error => {
+        console.error('Error updating game:', error);
+        reject(error); // Rejects the promise with the error received from gameService.updateGame
+      });
+  });
+}
+
   </script>
 
 
@@ -68,11 +87,15 @@
         </div>
         <div>
           <label for="updated">Updated:</label>
-          <input type="text" id="updated" v-model="formattedUpdated" />
+          <input type="text" id="updated" v-model="game.updated" />
         </div>
         <div>
           <label for="rating">Rating:</label>
-          <input type="text" id="rating" v-model="game.rating" />
+          <input type="text" id="rating" v-model="game.rating.lowerBound.value" />
+        </div>
+        <div>
+          <label for="rating">Rating Top:</label>
+          <input type="text" id="ratingTop" v-model="game.ratingTop.lowerBound.value" />
         </div>
         <div>
           <label for="playTime">Play Time:</label>
@@ -84,7 +107,7 @@
         </div>
         <div>
           <label for="platforms">Platforms:</label>
-          <input type="text" id="platforms" v-model="game.platforms" />
+          <input type="text" id="platforms" v-model="game.platform" />
         </div>
         <div>
           <label for="developers">Developers:</label>
@@ -96,7 +119,7 @@
         </div>
         <div class="edit">
           <router-link to="/games">
-            <button id="edit" style= "width: 100%; height: 100%;">Edit Game</button>
+            <button @click="updateGame(game.id)" id="updateGame" style= "width: 100%; height: 100%;">Edit Game</button>
           </router-link>
         </div>
       </form>
@@ -106,7 +129,7 @@
   
 <style>
 
-.uopdateform {
+.updateform {
     margin:auto;
     width: 70%;
     padding: 20px;
