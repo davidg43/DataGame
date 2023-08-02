@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @ResponseBody
-@CrossOrigin(origins = "http://localhost:4000")
+@CrossOrigin(origins = "http://localhost:4000/**")
 
 public class IndexController {
 

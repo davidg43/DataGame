@@ -1,6 +1,11 @@
 <template>
   <nav class="navbar">
     <div class="navbar-logo">
+      <div id="app">
+        <input v-model="search" @input="search" type="text" placeholder="Search...">
+        <button type="submit">Search</button>
+        
+      </div>
       <router-link to="/">
         <Icon class="icon" icon="fxemoji:videogame" />
         <span class="logo-text">DataGame</span>
@@ -20,10 +25,12 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const currentRoute = computed(() => useRoute().path);
+
 </script>
 
 <style scoped>
 .navbar {
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,5 +66,10 @@ const currentRoute = computed(() => useRoute().path);
 
 .nav-link.active {
   font-weight: bold;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 </style>

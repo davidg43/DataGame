@@ -29,6 +29,7 @@
   import { Icon } from "@iconify/vue"
   import GameService from "../service/GameService.js";
   import Layout from './Layout.vue';
+import axios from "axios";
   
   const game = ref(null);
   const gameService = new GameService();
@@ -44,6 +45,59 @@
     return dateTimeString ? dateTimeString.replace("T", " ") : "N/A";
   }
 
+  async function editGame(game) {
+    let response = await axios.put("http://localhost:8080/edit/" + game.id, game).then(response => console.log(response))
+
+  // console.log(JSON.stringify(game));
+  // fetch("http://localhost:8080/edit/" + game.id, {
+  //   method: 'PUT',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //  body: JSON.stringify(game)
+  
+  // .then(response => {
+  //   if (!response.ok) {
+  //     throw new Error('Network response was not ok');
+  //   }
+  //   // Aquí puedes manejar la respuesta en caso de éxito si es necesario
+  //   // Por ejemplo, puedes mostrar un mensaje de éxito o redireccionar a otra página
+  //   console.log('Game edited successfully');
+  // })
+  // .catch(error => {
+  //   // Manejo de errores
+  //   console.error('Error editing game:', error);
+  // });
+}
+
+
+  // function editGame(game){
+  //   console.log(JSON.stringify(game))
+  //   fetch("http://localhost:8080/edit/" + game.id, game, {method:'PUT'});
+  // }
+  
+  // const options = {
+  // method: 'PUT',
+  // headers: {
+  // 'Content-Type': 'application/json',
+  // },
+  // };
+
+  // async function putData(url, op){
+  //     try {
+
+  //       const formData= new FormData(this.updatedGame)
+  //       console.log("holaaaaaaaaaaaaa")
+  //       console.log(fetch(url, formData).then(response => response.json()))
+  //   } catch (error) {
+  //     return error
+  //   }
+  // }
+
+  // function editGame(id){
+  //   putData("http://localhost:8080/edit/" + id, options)
+  // }
+
   //const formattedUpdated = computed(() => formatDateTime(game.value.updated));
 
   // function updateGame(id) {
@@ -51,19 +105,21 @@
   //   console.log('Edited Game:', id);
   // }
 
-  function updateGame(id) {
-  return new Promise((resolve, reject) => {
-    gameService.updateGame(id)
-      .then(response => {
-        console.log('Edited Game:', id);
-        resolve(response); // Resolves the promise with the response from gameService.updateGame
-      })
-      .catch(error => {
-        console.error('Error updating game:', error);
-        reject(error); // Rejects the promise with the error received from gameService.updateGame
-      });
-  });
-}
+//   function updateGame(id) {
+//   return new Promise((resolve, reject) => {
+//     gameService.updateGame(id)
+//       .then(response => {
+//         console.log('Edited Game:', id);
+//         resolve(response); // Resolves the promise with the response from gameService.updateGame
+//       })
+//       .catch(error => {
+//         console.error('Error updating game:', error);
+//         reject(error); // Rejects the promise with the error received from gameService.updateGame
+//       });
+//   });
+// }
+
+
 
   </script>
 
@@ -72,7 +128,7 @@
   <Layout>
     <div class="updateform" v-if="game">
       <h2>Edit Game</h2>
-      <form @submit="updateGame">
+      <form v-on:submit="updatedGame">
         <div>
           <label for="title">Title:</label>
           <input type="text" id="title" v-model="game.title" />
@@ -118,9 +174,9 @@
           <input type="text" id="genres" v-model="game.genres" />
         </div>
         <div class="edit">
-          <router-link to="/games">
-            <button @click="updateGame(game.id)" id="updateGame" style= "width: 100%; height: 100%;">Edit Game</button>
-          </router-link>
+          <!-- <router-link to="/games"> -->
+            <button @click="editGame(game)" id="editGame" style= "width: 100%; height: 100%;">Edit Game</button>
+          <!-- </router-link> -->
         </div>
       </form>
     </div>
