@@ -86,7 +86,7 @@ public class IndexController {
     
     // ########################### Filter ###########################
     @CrossOrigin(origins = "http://localhost:4000")
-    @GetMapping("/games/{query}")
+    @GetMapping("/filter/{query}")
     public List<Game> getGamesByQuery(
         @PathVariable(name = "query") String query,
         @RequestParam(name = "p", required = false) String platform,

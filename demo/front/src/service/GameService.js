@@ -10,15 +10,15 @@ export default class GameService {
     }
 
     getByPlatform(name) {
-        return axios.get(this.url + "p?p=" + name).then(response => response.data);
+        return axios.get(this.url + "/p?p=" + name).then(response => response.data);
     }
     
     getByName(name) {
-        return axios.get(this.url + "t?t=" + name).then(response => response.data);
+        return axios.get("http://localhost:8080/filter" + "/t?t=" + name).then(response => response.data);
     }
 
     getByNameAndPlatform(name, platform) {
-        return axios.get(this.url + "pt?p=" + platform + "&t=" + name).then(response => response.data);
+        return axios.get(this.url + "/pt?p=" + platform + "&t=" + name).then(response => response.data);
     }
 
     updateIndex() {

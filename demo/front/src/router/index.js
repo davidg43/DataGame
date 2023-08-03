@@ -7,6 +7,7 @@ import GameHome from '../view/GameHome.vue'
 import AddGame from "../view/AddGame.vue"
 import EditGame from "../view/EditGame.vue"
 import OneGame from "../view/OneGame.vue"
+import GameFind from "../view/GameFind.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +36,11 @@ const router = createRouter({
       path: '/edit/:id',
       name: 'edit',
       component: EditGame
+    },
+    {
+      path: '/find/:query',
+      name: 'find',
+      component: GameFind
     },
     {
       path: '/add',

@@ -2,8 +2,8 @@
   <nav class="navbar">
     <div class="navbar-logo">
       <div id="app">
-        <input v-model="search" @input="search" type="text" placeholder="Search...">
-        <button type="submit">Search</button>
+        <input v-model="gameName" type="text" placeholder="Search...">
+        <button @click="searchName(gameName)" id="search">Search</button>
         
       </div>
       <router-link to="/">
@@ -22,9 +22,28 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import GameService from '../service/GameService';
+import GameFind from './GameFind.vue';
 
 const currentRoute = computed(() => useRoute().path);
+const gameService = new GameService();
+const router = useRouter();
+
+function searchName(query, title) {
+  const games = gameService.getByName(title);
+  console.log(games);
+  if (games.length == 0) {
+    alert('Games with this name are not found');
+  } else {
+    router.push({
+    path: '/find/:query',
+    params: { query: query },
+    name: 'find',
+    component: GameFind,
+});
+  }
+}
 
 </script>
 
