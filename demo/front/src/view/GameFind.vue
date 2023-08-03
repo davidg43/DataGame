@@ -29,7 +29,7 @@
 
 const filteredGames = computed(() => {
   return games.value.filter((game) =>
-    game.name.toLowerCase().includes(query.toLowerCase())
+    game.name.toLowerCase().includes(props.query.toLowerCase())
   );
 });
 

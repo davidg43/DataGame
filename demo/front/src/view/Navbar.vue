@@ -31,7 +31,7 @@ const gameService = new GameService();
 const router = useRouter();
 
 function searchName(query, title) {
-  const games = gameService.getByName(title);
+  const games = gameService.getByName(query);
   console.log(games);
   if (games.length == 0) {
     alert('Games with this name are not found');
